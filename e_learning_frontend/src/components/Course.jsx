@@ -7,7 +7,7 @@ import Assignments from "./Assignments";
 
 function Course({ is_std }) {
   const [announcements, setAnnouncements] = useState(false);
-  const [assignments, setAssignments] = useState(true);
+  const [assignments, setAssignments] = useState(false);
 
   return (
     <>
@@ -38,7 +38,12 @@ function Course({ is_std }) {
             >
               Announcements
             </button>
-            <button className=" btn course-btn">Assignments</button>
+            <button
+              className=" btn course-btn"
+              onClick={() => setAssignments(!announcements)}
+            >
+              Assignments
+            </button>
           </div>
         )}
       </div>
