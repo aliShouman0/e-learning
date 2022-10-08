@@ -118,6 +118,21 @@ img {
 }
 /* end  header*/
 
+/* start course */
+
+.course-card {
+  background-color: white;
+  margin: 1rem;
+  border-radius: 10px;
+  height: 20%;
+  width: 20%;
+}
+
+.course-header{
+  
+}
+/* end course */
+
 /* start footer */
 
 .footer {
