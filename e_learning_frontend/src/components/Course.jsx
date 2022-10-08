@@ -13,16 +13,17 @@ function Course({ is_std }) {
           <div className="user-img">
             <img src={userImg} alt="userImg" />
           </div>
-          <p className="instructor-name">Ali Shouman</p>
-          <p className="course-nb">M1104</p>
-
-          {is_std && (
-            <>
-              <button className="course-btn">Announcements</button>
-              <button className="course-btn">Assignments</button>
-            </>
-          )}
+          <div className="">
+            <p className="instructor-name">Ali Shouman</p>
+            <p className="course-nb">M1104</p>
+          </div>
         </div>
+        {is_std && (
+          <div className="course-footer">
+            <button className="btn course-btn">Announcements</button>
+            <button className=" btn  course-btn">Assignments</button>
+          </div>
+        )}
       </div>
     </>
   );

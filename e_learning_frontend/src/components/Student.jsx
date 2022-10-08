@@ -7,7 +7,7 @@ function Student() {
   return (
     <>
       <Header />
-      <Card />
+      <Card is_std={true} />
       <Footer />
     </>
   );
