@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Footer from "./Footer";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  //Validate input prevent enter empty email or password
   const [error, setError] = useState(false);
 
   const onsubmit = (e) => {
@@ -35,6 +36,7 @@ function Login() {
               className="input-login"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
             <input
               type="password"
@@ -42,13 +44,14 @@ function Login() {
               value={password}
               className="input-login"
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
             <input type={"submit"} value="Login" className="btn btn-block" />
             {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
           </form>
         </div>
       </div>
-      <Footer />
+      <Footer/>
     </>
   );
 }

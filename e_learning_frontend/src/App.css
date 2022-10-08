@@ -77,7 +77,46 @@ img {
   font-size: 1.5vw;
   font-weight: bolder;
   cursor: pointer;
+  transition: all 0.5s ease-in-out;
 }
+
+.btn:hover {
+  opacity: 0.7;
+  transform: scale(0.8);
+}
+
+/* start  header*/
+.header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #78685a;
+  color: white;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.user-info p {
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
+
+.user-img {
+  width: 6vw;
+  height: 6vh;
+  margin: 0.9rem;
+}
+
+.header .btn {
+  height: 20%;
+  margin: auto 0.9rem;
+  padding: 0.7rem;
+  cursor: pointer;
+  font-size: 1.3vw;
+}
+/* end  header*/
 
 /* start footer */
 
@@ -88,6 +127,8 @@ img {
   width: 100%;
   background-color: #78685a;
   color: white;
+  position: absolute;
+  bottom: 0;
 }
 
 .footer .logo {
@@ -98,11 +139,13 @@ img {
 }
 
 .footer-info {
-  margin: auto 0.9rem; 
-  text-align: center;  
+  margin: auto 0.9rem;
+  text-align: center;
 }
 
- 
+.footer-info p {
+  padding: 0.3rem;
+}
 
 .footer-center {
   margin: auto;
@@ -111,3 +154,5 @@ img {
   letter-spacing: 2px;
   text-align: center;
 }
+
+/* end footer */
