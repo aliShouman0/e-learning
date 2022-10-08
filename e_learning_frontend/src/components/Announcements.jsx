@@ -1,6 +1,6 @@
 import React from "react";
 
-function Announcements({ close }) {
+function Announcements({ close,course_nb }) {
   return (
     <div className="popup">
       <div className="pop-box">

@@ -176,7 +176,7 @@ img {
 
 /*  announcements assignments popup*/
 .popup {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -232,17 +232,24 @@ img {
 }
 /* end announcements assignments popup */
 
+/* student  */
+.student-main {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+/* end student  */
+
 /* start footer */
 
 .footer {
+  margin-top: 5rem;
   display: flex;
   justify-content: space-between;
   height: 20vh;
   width: 100%;
   background-color: #78685a;
-  color: white;
-  position: absolute;
-  bottom: 0;
+  color: white; 
 }
 
 .footer .logo {

@@ -1,7 +1,7 @@
 import React from "react";
 import assignments from "../assets/assignments.png";
 
-function Assignments({ close }) {
+function Assignments({ close, course_nb }) {
   return (
     <div className="popup">
       <div className="pop-box">
