@@ -6,7 +6,10 @@ function Footer() {
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
-      <div className="footer-center">Learn With Us </div>
+      <div className="footer-center">
+        <p>Learn With Us</p>
+        <p> 📙📘📗📖📕📔📚🧾</p>
+      </div>
       <div className="footer-info">
         <p>hello@learn.com</p>
         <p>0096183/123456</p>

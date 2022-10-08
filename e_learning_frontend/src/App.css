@@ -19,6 +19,15 @@ img {
   height: 80vh;
 }
 
+.error {
+  margin: 0.5rem auto;
+  padding: 0.5rem;
+  font-size: 1.5vw;
+  font-weight: lighter;
+  border: 1px solid #71543c;
+  border-radius: 10px;
+}
+
 /* login */
 .card {
   display: flex;
@@ -89,16 +98,16 @@ img {
 }
 
 .footer-info {
-  margin: auto 0.9rem;
+  margin: auto 0.9rem; 
+  text-align: center;  
 }
 
-.footer-info p {
-  padding: 0.3rem;
-}
+ 
 
 .footer-center {
   margin: auto;
   font-size: 3vw;
   font-weight: bolder;
   letter-spacing: 2px;
+  text-align: center;
 }

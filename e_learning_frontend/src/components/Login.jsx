@@ -4,16 +4,31 @@ import Footer from "./Footer";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+
+  const onsubmit = (e) => {
+    e.preventDefault();
+    setError(false);
+    if (!email) {
+      setError(true);
+      return;
+    }
+    if (!password) {
+      setError(true);
+      return;
+    }
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <>
-      {" "}
       <div className="center">
         <div className="card">
           <div className="card-header">
             <p>Login</p>
           </div>
-          <form className="form">
+          <form className="form" onSubmit={onsubmit}>
             <input
               type="email"
               placeholder="Email"
@@ -29,6 +44,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
             <input type={"submit"} value="Login" className="btn btn-block" />
+            {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
           </form>
         </div>
       </div>
