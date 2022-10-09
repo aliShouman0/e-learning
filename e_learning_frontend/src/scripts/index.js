@@ -1,6 +1,6 @@
 import axios from "./axios.min.js";
-import React from "react";
-import { Navigate } from "react-router-dom";
+ 
+
 
 const e_learning = {};
 
@@ -38,19 +38,19 @@ e_learning.postAPI =  async (api_url, api_data) => {
   }
 };
 
-e_learning.logout = async () => {
-  const api_logout = `${e_learning.baseUrl}/logout`;
+e_learning.logout = async (navigate) => {
+  const api_logout = `${e_learning.baseUrl}logout`;
   const data = new FormData();
   data.append("token", e_learning.token);
   await e_learning.postAPI(api_logout, data);
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_info");
-  window.location.reload();
+  navigate('/login');
+
 };
 
 // check if login by checking data in  localStorage
 // check if user are login in and chck if token are valid
-
 e_learning.checkLogin = async  () => {
   
   if (!localStorage.getItem("access_token")) {
@@ -64,7 +64,6 @@ e_learning.checkLogin = async  () => {
   const api_userInfo = new FormData();
   api_userInfo.append("token", localStorage.getItem("access_token"));
   const user_info = await  e_learning.postAPI(user_info_url, api_userInfo);
-console.log( "c2 ",user_info )
   if (user_info.status && user_info.status === 200) {
     localStorage.setItem("user_info", JSON.stringify(user_info.data));
     return true;
@@ -74,6 +73,40 @@ console.log( "c2 ",user_info )
     return false;
   }
 };
+ 
+// login
+e_learning.login = async (email, password, setError,setdisabled,navigate) => {
+  const data = new FormData();
+  const url = `${e_learning.baseUrl}login`;
+  data.append("email", email);
+  data.append("password", password);
+  const login_info = await e_learning.postAPI(url, data); 
+  if (login_info.status && login_info.status === 200) {
+    // if done save toke and get user info by api
+    const access_token = login_info.data.access_token; 
+    localStorage.setItem("access_token", access_token);
+    // get user info
+    const user_info_url = `${e_learning.baseUrl}me`;
+    // this api need token
+    const api_userInfo = new FormData();
+    api_userInfo.append("token", access_token);
+    const user_info = await e_learning.postAPI(user_info_url, api_userInfo);
+    //  if token valid will get user info and save in local storage then redirect to home page
+    if (user_info.status && user_info.status === 200) {
+      localStorage.setItem("user_info", JSON.stringify(user_info.data));
+       navigate('/student');
+    } else {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user_info");
+      setError(true);
+      setdisabled(false);
+    }
+  } else {
+    setError(true);
+    setdisabled(false);
+  }
+};
+
 export default e_learning;
 // // like user
 // e_learning.likeUser = async (btn) => {
