@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Course;
 use App\Models\Announcement;
 use App\Models\Assignment;
-
+use App\Models\Submit;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -42,10 +42,16 @@ class MainController extends Controller
             "status" => false
         ]);
     }
-    //get all Assignments for specific Course
+    //get all Assignments for specific Course that not submit yet
     function getAssignments($code)
     {
-        $result = Assignment::where("course_code", $code)->get();
+        $user_id = Auth::id();
+        $result = Assignment::where("course_code", $code)
+            ->whereNot("id", Submit::select('assignment_id')
+                ->where("user_id", $user_id)
+                ->where("course_code", $code)
+                ->get())
+            ->get();
         if ($result)
             return response()->json([
                 "status" => true,
@@ -54,5 +60,28 @@ class MainController extends Controller
         return response()->json([
             "status" => false
         ]);
+    }
+
+    //submit Assignment
+    function submitAssignment(Request $request)
+    {
+        $id = Auth::id();
+        $submit = new Submit;
+        if ($request->assignment_id && $request->file) {
+            $submit->user_id = $id;
+            $submit->assignment_id = $request->assignment_id;
+            $submit->file_path = $request->file;
+            if ($submit->save()) {
+                return response()->json([
+                    "status" => "Success",
+                    "data" => $submit
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
     }
 }

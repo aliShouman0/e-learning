@@ -24,8 +24,10 @@ Route::group(["prefix" => "v0.1"], function () {
     Route::get('get_courses', [MainController::class, 'getCourses']);
     //get all Announcements for specific Course
     Route::get('get_announcements/{code}', [MainController::class, 'getAnnouncements']);
-    //get all Assignments for specific Course
+    //get all Assignments for specific Course that not submit yet
     Route::get('get_assignments/{code}', [MainController::class, 'getAssignments']);
+    //submit  Assignment 
+    Route::post('submit_assignment', [MainController::class, 'submitAssignment']);
   });
   // add/signup  user
   // Route::post("signup", [AuthController::class, "signup"])->name("signup");
