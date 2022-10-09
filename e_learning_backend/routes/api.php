@@ -27,7 +27,10 @@ Route::group(["prefix" => "v0.1"], function () {
       [AuthController::class, 'refresh']
     );
 
+    //get all Courses that enrolled by specific student
     Route::get('get_courses', [MainController::class, 'getCourses']);
+    //get all Announcements for specific Course
+    Route::get('get_Announcements/{code}', [MainController::class,'getAnnouncements']);
   });
   // add/signup  user
   // Route::post("signup", [AuthController::class, "signup"])->name("signup");
