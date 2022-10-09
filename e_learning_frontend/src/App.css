@@ -32,6 +32,20 @@ img {
   display: none;
 }
 
+.btn:disabled,
+.btn[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
+
+.btn:disabled:hover,
+.btn[disabled]:hover{
+  transform: scale(1);
+}
+
 /* login */
 .card {
   display: flex;
@@ -211,7 +225,7 @@ img {
 
 .assignment-file {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
 }
 
