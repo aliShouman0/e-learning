@@ -10,27 +10,22 @@ use App\Http\Controllers\AuthController;
 
 Route::group(["prefix" => "v0.1"], function () {
   Route::group([
-
     'middleware' => 'guard',
-    //  'prefix' => 'auth'
-
   ], function () {
-    // get my data
+    //get my data
     Route::post('me', [AuthController::class, 'me']);
-    // logout
+    //logout
     Route::post('logout', [AuthController::class, 'logout']);
-    // get jwt info
+    //get jwt info
     Route::post('payload', [AuthController::class, 'payload']);
-
-    Route::post(
-      'refresh',
-      [AuthController::class, 'refresh']
-    );
-
+    //refresh jwt  
+    Route::post('refresh', [AuthController::class, 'refresh']);
     //get all Courses that enrolled by specific student
     Route::get('get_courses', [MainController::class, 'getCourses']);
     //get all Announcements for specific Course
-    Route::get('get_Announcements/{code}', [MainController::class,'getAnnouncements']);
+    Route::get('get_announcements/{code}', [MainController::class, 'getAnnouncements']);
+    //get all Assignments for specific Course
+    Route::get('get_assignments/{code}', [MainController::class, 'getAssignments']);
   });
   // add/signup  user
   // Route::post("signup", [AuthController::class, "signup"])->name("signup");

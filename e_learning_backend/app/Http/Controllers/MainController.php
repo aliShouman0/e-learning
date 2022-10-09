@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Course;
+use App\Models\Announcement;
+use App\Models\Assignment;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,11 +28,24 @@ class MainController extends Controller
             "status" => false
         ]);
     }
-
+    //get all Announcements for specific Course
     function getAnnouncements($code)
     {
-        
-        $result = Course::with("enrolled")->where("course_code", $code)->get();
+
+        $result = Announcement::where("course_code", $code)->get();
+        if ($result)
+            return response()->json([
+                "status" => true,
+                "result" => $result
+            ]);
+        return response()->json([
+            "status" => false
+        ]);
+    }
+    //get all Assignments for specific Course
+    function getAssignments($code)
+    {
+        $result = Assignment::where("course_code", $code)->get();
         if ($result)
             return response()->json([
                 "status" => true,
