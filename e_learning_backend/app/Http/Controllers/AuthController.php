@@ -38,6 +38,7 @@ class AuthController extends Controller
         return $this->respondWithToken(auth()->refresh());
     }
 
+    
 
     protected function respondWithToken($token)
     {
@@ -52,4 +53,6 @@ class AuthController extends Controller
     {
         return auth()->payload();
     }
+
+    
 }

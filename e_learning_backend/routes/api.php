@@ -6,8 +6,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 
 
-
-
 Route::group(["prefix" => "v0.1"], function () {
   Route::group([
     'middleware' => 'guard',
@@ -23,11 +21,12 @@ Route::group(["prefix" => "v0.1"], function () {
     //get all Courses that enrolled by specific student
     Route::get('get_course/{code}', [MainController::class, 'getCourse']);
     Route::get('get_enrolled', [MainController::class, 'getEnrolled']);
-
     //get all Announcements for specific Course
     Route::get('get_announcements/{code}', [MainController::class, 'getAnnouncements']);
     //get all Assignments for specific Course that not submit yet
     Route::get('get_assignments/{code}', [MainController::class, 'getAssignments']);
+    //get Instructor info
+    Route::get('get_instructor/{id}', [MainController::class, 'getInstructor']);
     //submit  Assignment 
     Route::post('submit_assignment', [MainController::class, 'submitAssignment']);
   });
@@ -36,21 +35,4 @@ Route::group(["prefix" => "v0.1"], function () {
   //login
   Route::post('login', [AuthController::class, 'login'])->name("login");
 });
-
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
-// Route::group([
-
-//     'middleware' => 'api',
-//     'prefix' => 'auth'
-
-// ], function ($router) {
-
-//     Route::post('login', 'AuthController@login');
-//     Route::post('logout', 'AuthController@logout');
-//     Route::post('refresh', 'AuthController@refresh');
-//     Route::post('me', 'AuthController@me');
-
-// });
+ 

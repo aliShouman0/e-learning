@@ -8,6 +8,8 @@ use App\Models\Announcement;
 use App\Models\Assignment;
 use App\Models\Submit;
 use App\Models\Enrolled;
+use App\Models\User;
+
 use Illuminate\Support\Facades\Auth;
 
 
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 class MainController extends Controller
 {
     //get all Courses that enrolled by specific student whereIn("code", Enrolled::select("course_code")
-           // ->where("user_id", $user_id)->get())with("enrolled")->get();
+    // ->where("user_id", $user_id)->get())with("enrolled")->get();
     function getCourse($code)
     {
         $user_id = Auth::id();
@@ -99,5 +101,20 @@ class MainController extends Controller
             "status" => "Error",
             "data" => "Error -Some Thing went wrong "
         ], 400);
+    }
+
+    // get instructor info
+    function getInstructor($id)
+    {
+        $result = User::where("_id", $id)
+            ->get();
+        if ($result)
+            return response()->json([
+                "status" => true,
+                "result" => $result
+            ]);
+        return response()->json([
+            "status" => false
+        ]);
     }
 }

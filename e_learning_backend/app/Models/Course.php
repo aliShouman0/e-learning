@@ -15,4 +15,11 @@ class Course extends Model
         return $this->belongsTo(Enrolled::class, "course_code", "code");
         
     }
+
+    public function instructor()
+    {
+        return $this->belongsTo(User::class, "assign_to", "id");
+        
+    }
+    
 }
