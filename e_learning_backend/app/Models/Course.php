@@ -13,5 +13,6 @@ class Course extends Model
     public function enrolled()
     {
         return $this->belongsTo(Enrolled::class, "course_code", "code");
+        
     }
 }

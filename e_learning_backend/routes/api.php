@@ -21,7 +21,9 @@ Route::group(["prefix" => "v0.1"], function () {
     //refresh jwt  
     Route::post('refresh', [AuthController::class, 'refresh']);
     //get all Courses that enrolled by specific student
-    Route::get('get_courses', [MainController::class, 'getCourses']);
+    Route::get('get_course/{code}', [MainController::class, 'getCourse']);
+    Route::get('get_enrolled', [MainController::class, 'getEnrolled']);
+
     //get all Announcements for specific Course
     Route::get('get_announcements/{code}', [MainController::class, 'getAnnouncements']);
     //get all Assignments for specific Course that not submit yet

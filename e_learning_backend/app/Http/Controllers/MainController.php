@@ -7,6 +7,7 @@ use App\Models\Course;
 use App\Models\Announcement;
 use App\Models\Assignment;
 use App\Models\Submit;
+use App\Models\Enrolled;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -14,11 +15,26 @@ use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
-    //get all Courses that enrolled by specific student
-    function getCourses()
+    //get all Courses that enrolled by specific student whereIn("code", Enrolled::select("course_code")
+           // ->where("user_id", $user_id)->get())with("enrolled")->get();
+    function getCourse($code)
     {
         $user_id = Auth::id();
-        $result = Course::with("enrolled")->where("user_id", $user_id)->get();
+        $result = Course::where("code", $code)->get();
+        if ($result)
+            return response()->json([
+                "status" => true,
+                "result" => $result
+            ]);
+        return response()->json([
+            "status" => false
+        ]);
+    }
+
+    function getEnrolled()
+    {
+        $user_id = Auth::id();
+        $result = Enrolled::where("user_id", $user_id)->with("course")->get();
         if ($result)
             return response()->json([
                 "status" => true,
