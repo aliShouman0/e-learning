@@ -17,15 +17,43 @@ function App() {
     }
   };
 
+  const getinstructor = async (data, setError) => {
+    const ins = [];
+    data.forEach(async (d, i) => {
+      const res = await get_instructor(setError, d.course.assign_to);
+      ins[i] = res.result;
+      //setInstructors([...instructors, res.result]);
+    });
+    return ins;
+  };
+
+  const get_instructor = async (setError, $id) => {
+    const url = `${
+      e_learning.baseUrl
+    }get_instructor/${$id}?token=${localStorage.getItem("access_token")}`;
+    const res = await e_learning.getAPI(url);
+    if (res.status && res.status === 200) {
+      return res.data;
+    } else {
+      setError(true);
+    }
+  };
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path={"/"} element={<Login />} />
         <Route path={"/login"} element={<Login />} />
-        {/* <Route path={"/login/error"} element={<Login wrong={true} />} /> */}
         <Route
           path={"/Student"}
-          element={<Student get_courses={get_courses} />}
+          element={
+            <Student
+              get_courses={get_courses}
+              get_instructor={get_instructor}
+              getinstructor={getinstructor}
+
+            />
+          }
         />
       </Routes>
     </BrowserRouter>

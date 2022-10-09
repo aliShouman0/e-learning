@@ -15,7 +15,7 @@ function Course({
 
   return (
     <>
-      {announcements && <Announcements close={() => setAnnouncements(false)} />}
+      {announcements && <Announcements course_nb={course_nb} close={() => setAnnouncements(false)} />}
       {assignments && <Assignments close={() => setAssignments(false)} />}
 
       <div className="course-card">
