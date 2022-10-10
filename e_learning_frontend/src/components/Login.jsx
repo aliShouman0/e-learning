@@ -2,35 +2,38 @@ import { useState } from "react";
 import e_learning from "../scripts";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import loading_img from "../assets/loading.png";
 
 function Login({ wrong }) {
-  
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //Validate input prevent enter empty email or password
   const [error, setError] = useState(wrong);
   const [disabled, setdisabled] = useState(false);
+  const [load, setLoad] = useState(false);
+
   const onsubmit = (e) => {
+    setLoad(true);
     setdisabled(true);
     e.preventDefault();
     setError(false);
     if (!email) {
       setError(true);
       setdisabled(false);
+      setLoad(false);
       return;
     }
     if (!password) {
       setError(true);
       setdisabled(false);
+      setLoad(false);
       return;
     }
-     setEmail("");
-     setPassword("");
-     e_learning.login(email, password, setError,setdisabled,navigate);
+    setEmail("");
+    setPassword("");
+     e_learning.login(email, password, setError, setdisabled, navigate);
   };
-
-
 
   return (
     <>
@@ -66,6 +69,11 @@ function Login({ wrong }) {
           </form>
         </div>
       </div>
+      {load &&!error && (
+        <div className="loading load-up">
+          <img src={loading_img} alt="loading_img" />
+        </div>
+      )}
       <Footer />
     </>
   );

@@ -2,6 +2,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Course from "./Course";
 import courseImg from "../assets/course.png";
+import loading_img from "../assets/loading.png";
 import userImg from "../assets/user.png";
 import e_learning from "../scripts";
 import { useEffect, useState } from "react";
@@ -52,6 +53,11 @@ function Student({ get_courses, getinstructor }) {
       <Header avatar={avatar} name={name} />
       {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
       <main className="student-main">
+        {!load && (
+          <div className="loading">
+            <img src={loading_img} alt="loading_img" />
+          </div>
+        )}
         {load &&
           Courses.map((course, i) => {
             course = course.course;
