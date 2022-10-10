@@ -112,79 +112,22 @@ e_learning.getAnnouncements = (course_nb) =>
     )}`
   );
 
-  e_learning.getAssignments = (course_nb) =>
+e_learning.getAssignments = (course_nb) =>
   fetch(
     `${
       e_learning.baseUrl
-    }get_assignments/${course_nb}?token=${localStorage.getItem(
-      "access_token"
-    )}`
+    }get_assignments/${course_nb}?token=${localStorage.getItem("access_token")}`
   );
+
+e_learning.getInstructorInfo = async (setError, id) => {
+  const url = `${
+    e_learning.baseUrl
+  }get_instructor/${id}?token=${localStorage.getItem("access_token")}`;
+  const res = await e_learning.getAPI(url);
+  if (res.status && res.status === 200) {
+    return res.data;
+  } else {
+    setError(true);
+  }
+};
 export default e_learning;
-// // like user
-// e_learning.likeUser = async (btn) => {
-//   const url = e_learning.baseUrl + "/favor"
-//   const data = new FormData();
-//   data.append("token", e_learning.token);
-//   data.append("favorite_id", btn.getAttribute("data-value"));
-//   const res = await e_learning.postAPI(url, data);
-//   const p = document.createElement("span");
-//   if (res.data.status === "exists") {
-//     p.innerText = "Already in Fav"
-
-//   }
-//   if (res.data.status === "Success") {
-//     p.innerText = "Added Done"
-
-//   }
-//   btn.parentElement.appendChild(p);
-//   setTimeout(() => {
-//     btn.parentElement.removeChild(btn.parentElement.lastChild)
-//   }, 3000)
-
-// }
-
-// // block user
-// e_learning.blockUser = async (btn) => {
-//   const url = e_learning.baseUrl + "/block"
-//   const data = new FormData();
-//   data.append("token", e_learning.token);
-//   data.append("blocked_user_id", btn.getAttribute("value"));
-//   const res = await e_learning.postAPI(url, data);
-//   window.location.reload();
-
-// }
-
-// chat user
-//when click on chat button will redirect to chat page and open like a new tab to chat with this user
-// e_learning.chat = async (btn) => {
-//   localStorage.setItem("letsChat", btn.getAttribute("value"));
-//   location.href = "chat.html"
-// }
-
-// // add Event Listener when all user are present on screen for like block and chat
-// e_learning.loadEvents = () => {
-//   // get all block   btn and add addEventListener
-//   const block = document.querySelectorAll(".block");
-//   block.forEach(element => {
-//     element.addEventListener("click", () => {
-//       e_learning.blockUser(element);
-//     })
-//   });
-
-//   // get all like   btn and add addEventListener
-//   const like = document.querySelectorAll(".like");
-//   like.forEach(element => {
-//     element.addEventListener("click", () => {
-//       e_learning.likeUser(element);
-//     })
-//   });
-
-//   // get all chat   btn and add addEventListener
-//   const chat = document.querySelectorAll(".chat");
-//   chat.forEach(element => {
-//     element.addEventListener("click", () => {
-//       e_learning.chat(element);
-//     })
-//   });
-// }

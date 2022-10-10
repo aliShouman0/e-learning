@@ -9,15 +9,25 @@ function Course({
   course_nb,
   img_instructors,
   img_course,
-  setError
+  setError,
 }) {
   const [announcements, setAnnouncements] = useState(false);
   const [assignments, setAssignments] = useState(false);
 
   return (
     <>
-      {announcements && <Announcements  course_nb={course_nb} close={() => setAnnouncements(false)} />}
-      {assignments && <Assignments course_nb={course_nb} close={() => setAssignments(false)} />}
+      {announcements && (
+        <Announcements
+          course_nb={course_nb}
+          close={() => setAnnouncements(false)}
+        />
+      )}
+      {assignments && (
+        <Assignments
+          course_nb={course_nb}
+          close={() => setAssignments(false)}
+        />
+      )}
 
       <div className="course-card">
         <div className="course-header">

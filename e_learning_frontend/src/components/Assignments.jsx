@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 
 function Assignments({ close, course_nb }) {
   const [assignments, setAssignments] = useState([]);
+  const [loadedFile, setLoadedFile] = useState(false);
 
   useEffect(() => {
     const res = async () => {
@@ -15,7 +16,11 @@ function Assignments({ close, course_nb }) {
     res();
   }, []);
   const submit = (id) => {
-    console.log(id);
+    //console.log(id);
+  };
+
+  const loadFile = (e) => {
+    setLoadedFile(true);
   };
 
   return (
@@ -25,11 +30,11 @@ function Assignments({ close, course_nb }) {
           X
         </button>
         <h2 className="popup-title">Assignments</h2>
+        {loadedFile && <p className="error">⛔❕✔️ File Loaded ⭕🛑❗</p>}
         {assignments.length > 0 &&
           assignments.map((assignment, i) => {
-            console.log(assignment);
             if (assignment.submit != null) {
-              return <></>;
+              return "";
             }
             return (
               <div className="pop-text" key={i}>
@@ -39,7 +44,12 @@ function Assignments({ close, course_nb }) {
                 </p>
                 <div className="assignment-file">
                   <label className="submit" htmlFor="submit">
-                    <input type="file" className="d-none" id="submit" />
+                    <input
+                      type="file"
+                      className="d-none"
+                      id="submit"
+                      onChange={(e) => loadFile(e)}
+                    />
                     <img src={assignment_png} alt="assignments" />
                   </label>
 

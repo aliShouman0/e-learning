@@ -5,7 +5,7 @@ import Student from "./components/Student";
 import e_learning from "./scripts";
 
 function App() {
-  const get_courses = async (setError) => {
+  const getCourses = async (setError) => {
     const url = `${e_learning.baseUrl}get_enrolled?token=${localStorage.getItem(
       "access_token"
     )}`;
@@ -17,26 +17,13 @@ function App() {
     }
   };
 
-  const getinstructor = async (data, setError) => {
-    const ins = [];
-    data.forEach(async (d, i) => {
-      const res = await get_instructor(setError, d.course.assign_to);
-      ins[i] = res.result;
-      //setInstructors([...instructors, res.result]);
-    });
+  const getInstructor = async (data, setError) => {
+    let ins = await Promise.all(
+      data.map((d) =>
+        e_learning.getInstructorInfo(setError, d.course.assign_to)
+      )
+    );
     return ins;
-  };
-
-  const get_instructor = async (setError, $id) => {
-    const url = `${
-      e_learning.baseUrl
-    }get_instructor/${$id}?token=${localStorage.getItem("access_token")}`;
-    const res = await e_learning.getAPI(url);
-    if (res.status && res.status === 200) {
-      return res.data;
-    } else {
-      setError(true);
-    }
   };
 
   return (
@@ -47,12 +34,7 @@ function App() {
         <Route
           path={"/Student"}
           element={
-            <Student
-              get_courses={get_courses}
-              get_instructor={get_instructor}
-              getinstructor={getinstructor}
-
-            />
+            <Student getCourses={getCourses} getInstructor={getInstructor} />
           }
         />
       </Routes>
