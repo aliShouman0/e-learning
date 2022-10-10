@@ -1,5 +1,5 @@
 import React from "react";
-import e_learning from "../scripts";
+import e_learning from "../scripts/e_learning";
 import { useEffect, useState } from "react";
 
 function Announcements({ close, courseNb }) {

@@ -8,11 +8,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWT
 {
-    
-    
+
+
     public function handle(Request $request, Closure $next)
     {
-        
+
         JWTAuth::parseToken()->authenticate();
         return $next($request);
     }

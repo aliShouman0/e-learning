@@ -87,7 +87,7 @@ class MainController extends Controller
         if ($request->assignment_id && $request->file) {
             $submit->user_id = $id;
             $submit->assignment_id = $request->assignment_id;
-            $submit->file_path = $request->file;
+            $submit->file_path ="request->file";
             if ($submit->save()) {
                 return response()->json([
                     "status" => "Success",

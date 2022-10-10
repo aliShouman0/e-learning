@@ -1,5 +1,5 @@
 import { useState } from "react";
-import e_learning from "../scripts";
+import e_learning from "../scripts/e_learning";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
 import loading_img from "../assets/loading.png";

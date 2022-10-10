@@ -1,6 +1,6 @@
 import React from "react";
 import userImg from "../assets/user.png";
-import e_learning from "../scripts";
+import e_learning from "../scripts/e_learning";
 import { useNavigate } from "react-router-dom";
 
 function Header() {
