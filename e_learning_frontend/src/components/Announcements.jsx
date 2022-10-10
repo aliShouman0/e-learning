@@ -2,12 +2,11 @@ import React from "react";
 import e_learning from "../scripts";
 import { useEffect, useState } from "react";
 
-function Announcements({ close, course_nb }) {
+function Announcements({ close, courseNb }) {
   const [announcements, setAnnouncements] = useState([]);
-
   useEffect(() => {
     const res = async () => {
-      const getAnnouncements = await e_learning.getAnnouncements(course_nb);
+      const getAnnouncements = await e_learning.getAnnouncements(courseNb);
       const data = await getAnnouncements.json();
       setAnnouncements(data.result);
     };

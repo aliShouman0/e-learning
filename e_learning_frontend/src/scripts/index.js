@@ -140,4 +140,25 @@ e_learning.submit_assignment = async (dataToSubmit, close,setsubmit) => {
   }
 };
 
+e_learning.getCourses = async (setError) => {
+  const url = `${e_learning.baseUrl}get_enrolled?token=${localStorage.getItem(
+    "access_token"
+  )}`;
+  const res = await e_learning.getAPI(url);
+  if (res.status && res.status === 200) {
+    return res.data;
+  } else {
+    setError(true);
+  }
+};
+
+e_learning.getInstructor = async (data, setError) => {
+  let ins = await Promise.all(
+    data.map((d) =>
+      e_learning.getInstructorInfo(setError, d.course.assign_to)
+    )
+  );
+  return ins;
+};
+
 export default e_learning;

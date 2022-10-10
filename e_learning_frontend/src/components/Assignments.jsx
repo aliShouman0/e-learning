@@ -3,7 +3,7 @@ import assignment_png from "../assets/assignments.png";
 import e_learning from "../scripts";
 import { useEffect, useState } from "react";
 
-function Assignments({ close, course_nb, setsubmit }) {
+function Assignments({ close, courseNb, setSubmit }) {
   const [assignments, setAssignments] = useState([]);
   const [loadedFile, setLoadedFile] = useState(false);
   const [disable, setDisable] = useState([]);
@@ -13,7 +13,7 @@ function Assignments({ close, course_nb, setsubmit }) {
 
   useEffect(() => {
     const res = async () => {
-      const getAssignments = await e_learning.getAssignments(course_nb);
+      const getAssignments = await e_learning.getAssignments(courseNb);
       const data = await getAssignments.json();
       setAssignments(data.result);
       setDisable(
@@ -42,12 +42,14 @@ function Assignments({ close, course_nb, setsubmit }) {
       file.readAsDataURL(e.target.files[0]);
     }
   };
+
   const submit = (id) => {
     dataToSubmit.append("token", localStorage.getItem("access_token"));
     dataToSubmit.append("assignment_id", id);
     dataToSubmit.append("file", "file.result");
-    e_learning.submit_assignment(dataToSubmit, close, setsubmit);
+    e_learning.submit_assignment(dataToSubmit, close, setSubmit);
   };
+
   return (
     <div className="popup">
       <div className="pop-box">

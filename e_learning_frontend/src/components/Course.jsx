@@ -10,7 +10,7 @@ function Course({
   imgInstructors,
   imgCourse,
   setError,
-  setsubmit
+  setSubmit,
 }) {
   const [announcements, setAnnouncements] = useState(false);
   const [assignments, setAssignments] = useState(false);
@@ -19,12 +19,16 @@ function Course({
     <>
       {announcements && (
         <Announcements
-          course_nb={courseNb}
+          courseNb={courseNb}
           close={() => setAnnouncements(false)}
         />
       )}
       {assignments && (
-        <Assignments course_nb={courseNb} setsubmit={setsubmit} close={setAssignments} />
+        <Assignments
+          courseNb={courseNb}
+          setSubmit={setSubmit}
+          close={setAssignments}
+        />
       )}
 
       <div className="course-card">
@@ -48,14 +52,12 @@ function Course({
             <button
               className="btn course-btn"
               onClick={() => setAnnouncements(!announcements)}
-              course_nb={courseNb}
             >
               Announcements
             </button>
             <button
               className=" btn course-btn"
               onClick={() => setAssignments(!announcements)}
-              course_nb={courseNb}
             >
               Assignments
             </button>

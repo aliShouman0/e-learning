@@ -4,21 +4,21 @@ import Course from "./Course";
 import courseImg from "../assets/course.png";
 import loading_img from "../assets/loading.png";
 import userImg from "../assets/user.png";
-//import e_learning from "../scripts";
+import e_learning from "../scripts";
 import { useEffect, useState } from "react";
 
-function Student({ getCourses, getInstructor }) {
+function Student() {
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
-  const [submit, setsubmit] = useState(false);
+  const [submit, setSubmit] = useState(false);
   const [Courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const { avatar, name } = JSON.parse(localStorage.getItem("user_info"));
 
   useEffect(() => {
     const get = async () => {
-      const data = await getCourses(setError);
-      const ins = await getInstructor(data.result, setError);
+      const data = await e_learning.getCourses(setError);
+      const ins = await e_learning.getInstructor(data.result, setError);
       setInstructors(ins);
       setCourses(data.result);
       setLoad(true);
@@ -30,16 +30,17 @@ function Student({ getCourses, getInstructor }) {
     <>
       <Header avatar={avatar} name={name} />
       {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
-      {submit &&
-        setTimeout(() => {
-          setsubmit(false);
-        }, 3000) && <p className="error">Submit Done!! 🎉🎉🎉</p>}
+
+      {submit && setTimeout(() => setSubmit(false), 3000) && (
+        <p className="error">Submit Done!! 🎉🎉🎉</p>
+      )}
       <main className="student-main">
         {!load && (
           <div className="loading">
             <img src={loading_img} alt="loading_img" />
           </div>
         )}
+
         {load &&
           Courses.map((course, i) => {
             course = course.course;
@@ -58,7 +59,7 @@ function Student({ getCourses, getInstructor }) {
                   course.image_path === "NA" ? courseImg : course.image_path
                 }
                 setError={setError}
-                setsubmit={setsubmit}
+                setSubmit={setSubmit}
               />
             );
           })}
