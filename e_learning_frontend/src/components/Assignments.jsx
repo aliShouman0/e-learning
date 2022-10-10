@@ -27,6 +27,10 @@ function Assignments({ close, course_nb }) {
         <h2 className="popup-title">Assignments</h2>
         {assignments.length > 0 &&
           assignments.map((assignment, i) => {
+            console.log(assignment);
+            if (assignment.submit != null) {
+              return <></>;
+            }
             return (
               <div className="pop-text" key={i}>
                 <p>
