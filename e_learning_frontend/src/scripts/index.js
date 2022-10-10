@@ -57,7 +57,7 @@ e_learning.checkLogin = async (
     localStorage.removeItem("user_info");
     if (!fromLogin) {
       setIsLogin(false);
-      navigate("/login");
+      navigate("/login", { state: { wrong: true } });
     }
     return;
   }
@@ -75,14 +75,15 @@ e_learning.checkLogin = async (
     localStorage.removeItem("access_token");
     localStorage.removeItem("user_info");
     if (!fromLogin) {
-      navigate("/login");
+      navigate("/login", { state: { wrong: true } });
       setIsLogin(false);
     }
     return;
   }
 };
 
-// login
+// login if login not valid set error/while testing data  setdisabled for login and
+//apply anmition login
 e_learning.login = async (email, password, setError, setdisabled, navigate) => {
   const data = new FormData();
   const url = `${e_learning.baseUrl}login`;
@@ -115,6 +116,7 @@ e_learning.login = async (email, password, setError, setdisabled, navigate) => {
   }
 };
 
+//get all Announcements for specific Course
 e_learning.getAnnouncements = (course_nb) =>
   fetch(
     `${
@@ -124,6 +126,7 @@ e_learning.getAnnouncements = (course_nb) =>
     )}`
   );
 
+//get all Assignments for specific Course that not submit yet
 e_learning.getAssignments = (course_nb) =>
   fetch(
     `${
@@ -131,6 +134,7 @@ e_learning.getAssignments = (course_nb) =>
     }get_assignments/${course_nb}?token=${localStorage.getItem("access_token")}`
   );
 
+//get Instructor info
 e_learning.getInstructorInfo = async (setError, id) => {
   const url = `${
     e_learning.baseUrl
@@ -142,7 +146,7 @@ e_learning.getInstructorInfo = async (setError, id) => {
     setError(true);
   }
 };
-
+//submit  Assignment
 e_learning.submit_assignment = async (dataToSubmit, close, setsubmit) => {
   const api = `${e_learning.baseUrl}submit_assignment`;
   const res = await e_learning.postAPI(api, dataToSubmit);
@@ -151,7 +155,7 @@ e_learning.submit_assignment = async (dataToSubmit, close, setsubmit) => {
     setsubmit(true);
   }
 };
-
+//get all Courses that enrolled by specific student
 e_learning.getCourses = async (setError) => {
   const url = `${e_learning.baseUrl}get_enrolled?token=${localStorage.getItem(
     "access_token"
@@ -163,7 +167,7 @@ e_learning.getCourses = async (setError) => {
     setError(true);
   }
 };
-
+//save Instructor info to load them on seach coures
 e_learning.getInstructor = async (data, setError) => {
   let ins = await Promise.all(
     data.map((d) => e_learning.getInstructorInfo(setError, d.course.assign_to))

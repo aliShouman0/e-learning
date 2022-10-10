@@ -38,6 +38,7 @@ function Student() {
   return (
     <>
       <Header />
+      {Courses.length===0 && <p className="error">No Enrollees🤨😥</p>}
       {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
 
       {submit && setTimeout(() => setSubmit(false), 3000) && (
