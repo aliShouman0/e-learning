@@ -3,7 +3,7 @@ import e_learning from "../scripts";
 import { useEffect, useState } from "react";
 
 function Announcements({ close, course_nb }) {
-  const [announcements, setAnnouncements] = useState(false);
+  const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
     const res = async () => {

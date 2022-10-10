@@ -111,6 +111,15 @@ e_learning.getAnnouncements = (course_nb) =>
       "access_token"
     )}`
   );
+
+  e_learning.getAssignments = (course_nb) =>
+  fetch(
+    `${
+      e_learning.baseUrl
+    }get_assignments/${course_nb}?token=${localStorage.getItem(
+      "access_token"
+    )}`
+  );
 export default e_learning;
 // // like user
 // e_learning.likeUser = async (btn) => {

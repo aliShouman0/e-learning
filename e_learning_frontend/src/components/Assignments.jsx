@@ -1,7 +1,23 @@
 import React from "react";
-import assignments from "../assets/assignments.png";
+import assignment_png from "../assets/assignments.png";
+import e_learning from "../scripts";
+import { useEffect, useState } from "react";
 
 function Assignments({ close, course_nb }) {
+  const [assignments, setAssignments] = useState([]);
+
+  useEffect(() => {
+    const res = async () => {
+      const getAssignments = await e_learning.getAssignments(course_nb);
+      const data = await getAssignments.json();
+      setAssignments(data.result);
+    };
+    res();
+  }, []);
+  const submit = (id) => {
+    console.log(id);
+  };
+
   return (
     <div className="popup">
       <div className="pop-box">
@@ -9,57 +25,10 @@ function Assignments({ close, course_nb }) {
           X
         </button>
         <h2 className="popup-title">Assignments</h2>
-        <div className="pop-text">
-          <p>
-            <b>Requirements: </b>
-            Lorem ipsum, totam! Eum veritatis magnam, consequatur maiores facere
-            iure.
-          </p>
-          <div className="assignment-file">
-            <label className="submit" htmlFor="submit">
-              <input type="file" className="d-none" id="submit" />
-              <img src={assignments} alt="assignments" />
-            </label>
-
-            <button type="file" className="btn">
-              Submit
-            </button>
-          </div>
-        </div>
-        <div className="pop-text">
-          <p>
-            <b>Requirements: </b>
-            Lorem ipsum, totam! Eum veritatis magnam, consequatur maiores facere
-            iure.
-          </p>
-          <div className="assignment-file">
-            <label className="submit" htmlFor="submit">
-              <input type="file" className="d-none" id="submit" />
-              <img src={assignments} alt="assignments" />
-            </label>
-
-            <button type="file" className="btn">
-              Submit
-            </button>
-          </div>
-        </div>
-        <div className="pop-text">
-          <p>
-            <b>Requirements: </b>
-            Lorem ipsum, totam! Eum veritatis magnam, consequatur maiores facere
-            iure.
-          </p>
-          <div className="assignment-file">
-            <label className="submit" htmlFor="submit">
-              <input type="file" className="d-none" id="submit" />
-              <img src={assignments} alt="assignments" />
-            </label>
-
-            <button type="file" className="btn">
-              Submit
-            </button>
-          </div>
-        </div>
+     
+        {assignments.length === 0 && (
+          <h2 className="pop-text text-center">🚫⛔🚫NO Assignments</h2>
+        )}
       </div>
     </div>
   );
