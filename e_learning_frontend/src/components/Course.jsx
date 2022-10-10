@@ -10,6 +10,7 @@ function Course({
   imgInstructors,
   imgCourse,
   setError,
+  setsubmit
 }) {
   const [announcements, setAnnouncements] = useState(false);
   const [assignments, setAssignments] = useState(false);
@@ -23,10 +24,7 @@ function Course({
         />
       )}
       {assignments && (
-        <Assignments
-          course_nb={courseNb}
-          close={() => setAssignments(false)}
-        />
+        <Assignments course_nb={courseNb} setsubmit={setsubmit} close={setAssignments} />
       )}
 
       <div className="course-card">

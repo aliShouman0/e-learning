@@ -125,10 +125,19 @@ e_learning.getInstructorInfo = async (setError, id) => {
   }get_instructor/${id}?token=${localStorage.getItem("access_token")}`;
   const res = await e_learning.getAPI(url);
   if (res.status && res.status === 200) {
-    
     return res.data.result[0];
   } else {
     setError(true);
   }
 };
+
+e_learning.submit_assignment = async (dataToSubmit, close,setsubmit) => {
+  const api = `${e_learning.baseUrl}submit_assignment`;
+  const res = await e_learning.postAPI(api, dataToSubmit);
+  if (res.status && res.status === 200) { 
+    close(false);
+    setsubmit(true)
+  }
+};
+
 export default e_learning;

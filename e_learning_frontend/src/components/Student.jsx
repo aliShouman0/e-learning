@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 function Student({ getCourses, getInstructor }) {
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
+  const [submit, setsubmit] = useState(false);
   const [Courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const { avatar, name } = JSON.parse(localStorage.getItem("user_info"));
@@ -29,6 +30,10 @@ function Student({ getCourses, getInstructor }) {
     <>
       <Header avatar={avatar} name={name} />
       {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
+      {submit &&
+        setTimeout(() => {
+          setsubmit(false);
+        }, 3000) && <p className="error">Submit Done!! 🎉🎉🎉</p>}
       <main className="student-main">
         {!load && (
           <div className="loading">
@@ -37,7 +42,7 @@ function Student({ getCourses, getInstructor }) {
         )}
         {load &&
           Courses.map((course, i) => {
-            course = course.course; 
+            course = course.course;
             return (
               <Course
                 key={i}
@@ -53,6 +58,7 @@ function Student({ getCourses, getInstructor }) {
                   course.image_path === "NA" ? courseImg : course.image_path
                 }
                 setError={setError}
+                setsubmit={setsubmit}
               />
             );
           })}

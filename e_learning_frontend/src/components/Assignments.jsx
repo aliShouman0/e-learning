@@ -3,10 +3,13 @@ import assignment_png from "../assets/assignments.png";
 import e_learning from "../scripts";
 import { useEffect, useState } from "react";
 
-function Assignments({ close, course_nb }) {
+function Assignments({ close, course_nb, setsubmit }) {
   const [assignments, setAssignments] = useState([]);
   const [loadedFile, setLoadedFile] = useState(false);
   const [disable, setDisable] = useState([]);
+  const dataToSubmit = new FormData();
+  const file = new FileReader();
+  let nbNotSubmit = 0;
 
   useEffect(() => {
     const res = async () => {
@@ -21,24 +24,34 @@ function Assignments({ close, course_nb }) {
     };
     res();
   }, []);
-  const submit = (id) => {};
 
-  const loadFile = (index) => {
-    setLoadedFile(true);
-    setDisable(
-      disable.map((d, i) => {
-        if (i === index) {
-          return false;
-        }
-        return true;
-      })
-    );
+  const loadFile = (e, index) => {
+    if (e.target.files.length !== 0) {
+      file.addEventListener("load", () => {
+        dataToSubmit.append("file_path", file.result);
+        setLoadedFile(true);
+        setDisable(
+          disable.map((d, i) => {
+            if (i === index) {
+              return false;
+            }
+            return true;
+          })
+        );
+      });
+      file.readAsDataURL(e.target.files[0]);
+    }
   };
-
+  const submit = (id) => {
+    dataToSubmit.append("token", localStorage.getItem("access_token"));
+    dataToSubmit.append("assignment_id", id);
+    dataToSubmit.append("file", "file.result");
+    e_learning.submit_assignment(dataToSubmit, close, setsubmit);
+  };
   return (
     <div className="popup">
       <div className="pop-box">
-        <button onClick={() => close()} className="popup-close">
+        <button onClick={() => close(false)} className="popup-close">
           X
         </button>
         <h2 className="popup-title">Assignments</h2>
@@ -48,6 +61,7 @@ function Assignments({ close, course_nb }) {
             if (assignment.submit != null) {
               return "";
             }
+            nbNotSubmit++;
             return (
               <div className="pop-text" key={i}>
                 <p>
@@ -59,7 +73,7 @@ function Assignments({ close, course_nb }) {
                     <input
                       type="file"
                       className="d-none"
-                      onChange={() => loadFile(i)}
+                      onChange={(e) => loadFile(e, i)}
                       id={i}
                       key={i}
                     />
@@ -80,7 +94,7 @@ function Assignments({ close, course_nb }) {
               </div>
             );
           })}
-        {assignments.length === 0 && (
+        {nbNotSubmit === 0 && (
           <h2 className="pop-text text-center">🚫⛔🚫NO Assignments</h2>
         )}
       </div>
