@@ -47,6 +47,10 @@ img {
   transform: scale(1);
 }
 
+.text-center{
+  text-align: center;
+}
+
 /* login */
 .card {
   display: flex;

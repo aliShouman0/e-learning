@@ -69,6 +69,7 @@ function Student({ get_courses, getinstructor }) {
                 img_course={
                   course.image_path === "NA" ? courseImg : course.image_path
                 }
+                setError={setError}
               />
             );
           })}
