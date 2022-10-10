@@ -37,20 +37,19 @@ function Student({ getCourses, getInstructor }) {
         )}
         {load &&
           Courses.map((course, i) => {
-            course = course.course;
-            // console.log( instructors )
+            course = course.course; 
             return (
               <Course
                 key={i}
-                is_std={true}
+                isStd={true}
                 instructors={
                   instructors[i] ? instructors[i].name : "Loading..."
                 }
-                course_nb={course.code}
-                img_instructors={
+                courseNb={course.code}
+                imgInstructors={
                   course.image_path === "NA" ? userImg : course.image_path
                 }
-                img_course={
+                imgCourse={
                   course.image_path === "NA" ? courseImg : course.image_path
                 }
                 setError={setError}

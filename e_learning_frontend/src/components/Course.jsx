@@ -4,11 +4,11 @@ import Announcements from "./Announcements";
 import Assignments from "./Assignments";
 
 function Course({
-  is_std,
+  isStd,
   instructors,
-  course_nb,
-  img_instructors,
-  img_course,
+  courseNb,
+  imgInstructors,
+  imgCourse,
   setError,
 }) {
   const [announcements, setAnnouncements] = useState(false);
@@ -18,46 +18,46 @@ function Course({
     <>
       {announcements && (
         <Announcements
-          course_nb={course_nb}
+          course_nb={courseNb}
           close={() => setAnnouncements(false)}
         />
       )}
       {assignments && (
         <Assignments
-          course_nb={course_nb}
+          course_nb={courseNb}
           close={() => setAssignments(false)}
         />
       )}
 
       <div className="course-card">
         <div className="course-header">
-          <img src={img_course} alt="courses" />
+          <img src={imgCourse} alt="courses" />
         </div>
 
         <div className="course-body">
           <div className="user-img">
-            <img src={img_instructors} alt="userImg" />
+            <img src={imgInstructors} alt="userImg" />
           </div>
 
           <div>
             <p className="instructor-name">{instructors}</p>
-            <p className="course-nb">{course_nb}</p>
+            <p className="course-nb">{courseNb}</p>
           </div>
         </div>
 
-        {is_std && (
+        {isStd && (
           <div className="course-footer">
             <button
               className="btn course-btn"
               onClick={() => setAnnouncements(!announcements)}
-              course_nb={course_nb}
+              course_nb={courseNb}
             >
               Announcements
             </button>
             <button
               className=" btn course-btn"
               onClick={() => setAssignments(!announcements)}
-              course_nb={course_nb}
+              course_nb={courseNb}
             >
               Assignments
             </button>

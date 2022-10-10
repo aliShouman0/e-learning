@@ -125,7 +125,8 @@ e_learning.getInstructorInfo = async (setError, id) => {
   }get_instructor/${id}?token=${localStorage.getItem("access_token")}`;
   const res = await e_learning.getAPI(url);
   if (res.status && res.status === 200) {
-    return res.data;
+    
+    return res.data.result[0];
   } else {
     setError(true);
   }

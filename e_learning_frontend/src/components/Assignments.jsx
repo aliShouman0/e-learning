@@ -6,21 +6,33 @@ import { useEffect, useState } from "react";
 function Assignments({ close, course_nb }) {
   const [assignments, setAssignments] = useState([]);
   const [loadedFile, setLoadedFile] = useState(false);
+  const [disable, setDisable] = useState([]);
 
   useEffect(() => {
     const res = async () => {
       const getAssignments = await e_learning.getAssignments(course_nb);
       const data = await getAssignments.json();
       setAssignments(data.result);
+      setDisable(
+        data.result.map((d) => {
+          return true;
+        })
+      );
     };
     res();
   }, []);
-  const submit = (id) => {
-    //console.log(id);
-  };
+  const submit = (id) => {};
 
-  const loadFile = (e) => {
+  const loadFile = (index) => {
     setLoadedFile(true);
+    setDisable(
+      disable.map((d, i) => {
+        if (i === index) {
+          return false;
+        }
+        return true;
+      })
+    );
   };
 
   return (
@@ -43,12 +55,13 @@ function Assignments({ close, course_nb }) {
                   {assignment.text}
                 </p>
                 <div className="assignment-file">
-                  <label className="submit" htmlFor="submit">
+                  <label className="submit" htmlFor={i}>
                     <input
                       type="file"
                       className="d-none"
-                      id="submit"
-                      onChange={(e) => loadFile(e)}
+                      onChange={() => loadFile(i)}
+                      id={i}
+                      key={i}
                     />
                     <img src={assignment_png} alt="assignments" />
                   </label>
@@ -56,6 +69,7 @@ function Assignments({ close, course_nb }) {
                   <button
                     type="file"
                     className="btn"
+                    disabled={disable[i]}
                     onClick={() => {
                       submit(assignment._id);
                     }}
