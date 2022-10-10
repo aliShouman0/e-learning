@@ -27,7 +27,7 @@ return new class extends Migration
             $table->integer("assign_to")->default('NA')
                     ->references('id')->on('users');
             $table->string('image_path')->default('NA');
-            $table->timestamps();
+            $table->timestamps(); 
         });
 
         Schema::create('enrollees', function (Blueprint $table) {

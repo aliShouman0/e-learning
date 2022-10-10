@@ -17,8 +17,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MainController extends Controller
 {
-    //get all Courses that enrolled by specific student whereIn("code", Enrolled::select("course_code")
-    // ->where("user_id", $user_id)->get())with("enrolled")->get();
+    //get all Courses that enrolled by specific student  
     function getCourse($code)
     {
         $user_id = Auth::id();
@@ -32,7 +31,6 @@ class MainController extends Controller
             "status" => false
         ]);
     }
-
     function getEnrolled()
     {
         $user_id = Auth::id();
@@ -65,10 +63,7 @@ class MainController extends Controller
     {
         $user_id = Auth::id();
         $result = Assignment::where("course_code", $code)
-            ->whereNot("id", Submit::select('assignment_id')
-                ->where("user_id", $user_id)
-                ->where("course_code", $code)
-                ->get())
+            ->where("course_code", $code)
             ->get();
         if ($result)
             return response()->json([
