@@ -32,9 +32,9 @@ function Login({ wrong }) {
     }
     setEmail("");
     setPassword("");
-     e_learning.login(email, password, setError, setdisabled, navigate);
+    e_learning.login(email, password, setError, setdisabled, navigate);
   };
-
+  e_learning.checkLogin(navigate, null, true);
   return (
     <>
       <div className="center">
@@ -69,7 +69,7 @@ function Login({ wrong }) {
           </form>
         </div>
       </div>
-      {load &&!error && (
+      {load && !error && (
         <div className="loading load-up">
           <img src={loading_img} alt="loading_img" />
         </div>
