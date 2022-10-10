@@ -63,8 +63,12 @@ class MainController extends Controller
     {
         $user_id = Auth::id();
         $result = Assignment::where("course_code", $code)
-            ->where("course_code", $code)
+            ->with("submit")
+            ->where("submit", null)
             ->get();
+        // $result =Submit::select('assignment_id')
+        // ->where("user_id", $user_id) ->project(['_id' => 0])
+        // ->get();
         if ($result)
             return response()->json([
                 "status" => true,

@@ -24,15 +24,15 @@ return new class extends Migration
             $table->string("code")->unique();
             $table->string("name");
             $table->string("credits");
-            $table->integer("assign_to")->default('NA')
-                    ->references('id')->on('users');
+            $table->string("assign_to")->default('NA')
+                ->references('id')->on('users');
             $table->string('image_path')->default('NA');
-            $table->timestamps(); 
+            $table->timestamps();
         });
 
         Schema::create('enrollees', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id")->references('id')->on('users');
+            $table->string("user_id")->references('id')->on('users');
             $table->string("course_code")->references('code')->on('courses');
             $table->string("mark");
             $table->timestamps();
@@ -40,26 +40,26 @@ return new class extends Migration
 
         Schema::create('announcements', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id")->references('id')->on('users');
+            $table->string("user_id")->references('id')->on('users');
             $table->string("course_code")->references('code')->on('courses');
-            $table->string("text") ;
+            $table->string("text");
             $table->timestamps();
         });
 
         Schema::create('assignments', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id")->references('id')->on('users');
+            $table->string("user_id")->references('id')->on('users');
             $table->string("course_code")->references('code')->on('courses');
-            $table->string("text") ;
+            $table->string("text");
             $table->timestamps("deadline");
             $table->timestamps();
         });
 
-        Schema::create('submit', function (Blueprint $table) {
+        Schema::create('submits', function (Blueprint $table) {
             $table->id();
-            $table->integer("user_id")->references('id')->on('users');
-            $table->string("assignment_id")->references('id')->on('assignments');
-            $table->string("file_path") ; 
+            $table->string("user_id")->references('id')->on('users');
+            $table->string("assignment_id");
+            $table->string("file_path");
             $table->timestamps();
         });
     }
@@ -77,6 +77,5 @@ return new class extends Migration
         Schema::dropIfExists('courses');
         Schema::dropIfExists('enrollees');
         Schema::dropIfExists('users_type');
-
     }
 };

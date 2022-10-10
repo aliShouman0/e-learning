@@ -11,6 +11,6 @@ class Assignment extends Model
     use HasFactory;
     public function submit()
     {
-        return $this->belongsTo(Submit::class, "assignment_id");
+        return $this->belongsTo(Submit::class, "_id","assignment_id");
     }
 }
