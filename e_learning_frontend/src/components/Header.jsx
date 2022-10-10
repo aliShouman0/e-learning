@@ -3,7 +3,8 @@ import userImg from "../assets/user.png";
 import e_learning from "../scripts";
 import { useNavigate } from "react-router-dom";
 
-function Header({ avatar, name }) {
+function Header() {
+  const { avatar, name } = JSON.parse(localStorage.getItem("user_info"));
   const navigate = useNavigate();
 
   return (
@@ -14,7 +15,9 @@ function Header({ avatar, name }) {
         </div>
         <p className="user-name">{name}</p>
       </div>
-      <button className="btn" onClick={()=>e_learning.logout(navigate)}>Logout</button>
+      <button className="btn" onClick={() => e_learning.logout(navigate)}>
+        Logout
+      </button>
     </header>
   );
 }

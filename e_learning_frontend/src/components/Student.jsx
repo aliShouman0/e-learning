@@ -6,16 +6,21 @@ import loading_img from "../assets/loading.png";
 import userImg from "../assets/user.png";
 import e_learning from "../scripts";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Student() {
+  const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(false);
   const [submit, setSubmit] = useState(false);
   const [Courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
-  const { avatar, name } = JSON.parse(localStorage.getItem("user_info"));
+  const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
+    e_learning.checkLogin(navigate, setIsLogin);
+
     const get = async () => {
       const data = await e_learning.getCourses(setError);
       const ins = await e_learning.getInstructor(data.result, setError);
@@ -23,12 +28,16 @@ function Student() {
       setCourses(data.result);
       setLoad(true);
     };
-    get();
-  }, []);
-
+    if (isLogin) {
+      get();
+    }
+  }, [isLogin]);
+  if (!isLogin) {
+    return <></>;
+  }
   return (
     <>
-      <Header avatar={avatar} name={name} />
+      <Header />
       {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
 
       {submit && setTimeout(() => setSubmit(false), 3000) && (

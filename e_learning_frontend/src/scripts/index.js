@@ -48,12 +48,11 @@ e_learning.logout = async (navigate) => {
 
 // check if login by checking data in  localStorage
 // check if user are login in and chck if token are valid
-e_learning.checkLogin = async () => {
+e_learning.checkLogin = async (navigate, setIsLogin) => {
   if (!localStorage.getItem("access_token")) {
     localStorage.removeItem("user_info");
-    console.log("1111 ");
-
-    return false;
+    setIsLogin(false);
+    navigate("/login");
   }
   // get user info
   const user_info_url = `${e_learning.baseUrl}me`;
@@ -62,11 +61,13 @@ e_learning.checkLogin = async () => {
   const user_info = await e_learning.postAPI(user_info_url, api_userInfo);
   if (user_info.status && user_info.status === 200) {
     localStorage.setItem("user_info", JSON.stringify(user_info.data));
-    return true;
+    setIsLogin(true);
+    return "";
   } else {
-    // localStorage.removeItem("access_token");
-    // localStorage.removeItem("user_info");
-    return false;
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user_info");
+    setIsLogin(false);
+    navigate("/login");
   }
 };
 
@@ -131,12 +132,12 @@ e_learning.getInstructorInfo = async (setError, id) => {
   }
 };
 
-e_learning.submit_assignment = async (dataToSubmit, close,setsubmit) => {
+e_learning.submit_assignment = async (dataToSubmit, close, setsubmit) => {
   const api = `${e_learning.baseUrl}submit_assignment`;
   const res = await e_learning.postAPI(api, dataToSubmit);
-  if (res.status && res.status === 200) { 
+  if (res.status && res.status === 200) {
     close(false);
-    setsubmit(true)
+    setsubmit(true);
   }
 };
 
@@ -154,9 +155,7 @@ e_learning.getCourses = async (setError) => {
 
 e_learning.getInstructor = async (data, setError) => {
   let ins = await Promise.all(
-    data.map((d) =>
-      e_learning.getInstructorInfo(setError, d.course.assign_to)
-    )
+    data.map((d) => e_learning.getInstructorInfo(setError, d.course.assign_to))
   );
   return ins;
 };
