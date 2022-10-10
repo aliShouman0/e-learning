@@ -25,7 +25,33 @@ function Assignments({ close, course_nb }) {
           X
         </button>
         <h2 className="popup-title">Assignments</h2>
-     
+        {assignments.length > 0 &&
+          assignments.map((assignment, i) => {
+            return (
+              <div className="pop-text" key={i}>
+                <p>
+                  <b>Requirements: </b>
+                  {assignment.text}
+                </p>
+                <div className="assignment-file">
+                  <label className="submit" htmlFor="submit">
+                    <input type="file" className="d-none" id="submit" />
+                    <img src={assignment_png} alt="assignments" />
+                  </label>
+
+                  <button
+                    type="file"
+                    className="btn"
+                    onClick={() => {
+                      submit(assignment._id);
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            );
+          })}
         {assignments.length === 0 && (
           <h2 className="pop-text text-center">🚫⛔🚫NO Assignments</h2>
         )}
