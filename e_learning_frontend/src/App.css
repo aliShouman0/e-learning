@@ -89,7 +89,6 @@ img {
   text-align: center;
   font-size: 1.5vw;
   font-weight: bolder;
-
 }
 
 .form {
@@ -131,7 +130,7 @@ img {
   display: flex;
   justify-content: space-between;
   background-color: #78685a;
-  color: white; 
+  color: white;
 }
 
 .user-info {
@@ -276,11 +275,34 @@ img {
   height: 100vh;
 }
 /* end student  */
-
+/* Admin */
+.left-panel {
+  height: 85vh;
+  width: 15%;
+  background-color: #78685a;
+  position: relative;
+}
+.btn-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+}
+.btn-container .btn {
+  width: 80%;
+  margin: 1rem auto;
+}
+.btn-logout {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 80%;    
+  margin: 1rem auto; 
+}
 /* start footer */
 
 .footer {
-  margin-top: 5rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: space-between;
   height: 20vh;
