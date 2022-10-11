@@ -3,7 +3,7 @@ import userImg from "../../assets/user.png";
 import e_learning from "../../scripts/e_learning";
 import { useNavigate } from "react-router-dom";
 
-function LeftPanel() {
+function LeftPanel({ SetgetCourses }) {
   const { avatar, name } = JSON.parse(localStorage.getItem("user_info"));
   const navigate = useNavigate();
   return (
@@ -17,7 +17,9 @@ function LeftPanel() {
       <div className="btn-container">
         <button className="btn">Students</button>
         <button className="btn">Instructors</button>
-        <button className="btn">Courses</button>
+        <button className="btn" onClick={() => SetgetCourses(true)}>
+          Courses
+        </button>
       </div>
       <button
         className="btn btn-logout"

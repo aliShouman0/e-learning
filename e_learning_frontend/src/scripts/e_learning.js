@@ -167,6 +167,22 @@ e_learning.getCourses = async (setError) => {
     setError(true);
   }
 };
+
+
+//get all Courses that enrolled by specific student
+e_learning.getAllCourses = async (setError) => {
+  const url = `${e_learning.baseUrl}get_all_Courses?token=${localStorage.getItem(
+    "access_token"
+  )}`;
+  const res = await e_learning.getAPI(url);
+  if (res.status && res.status === 200) {
+    return res.data;
+  } else {
+    setError(true);
+  }
+};
+
+
 //save Instructor info to load them on seach coures
 e_learning.getInstructor = async (data, setError) => {
   let ins = await Promise.all(
