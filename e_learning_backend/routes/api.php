@@ -29,11 +29,10 @@ Route::group(["prefix" => "v0.1"], function () {
     Route::get('get_instructor/{id}', [MainController::class, 'getInstructor']);
     //submit  Assignment 
     Route::post('submit_assignment', [MainController::class, 'submitAssignment']);
-    
+
     //later add  those api to new guard like jwt to check if admin user   ////
     //get all  Courses
     Route::get('get_all_Courses', [MainController::class, 'getAllCourses']);
-
     //get all  instructor
     Route::get('get_instructors', [MainController::class, 'getInstructors']);
   });
@@ -42,4 +41,3 @@ Route::group(["prefix" => "v0.1"], function () {
   //login
   Route::post('login', [AuthController::class, 'login'])->name("login");
 });
- 

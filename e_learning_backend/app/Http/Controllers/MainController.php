@@ -9,6 +9,7 @@ use App\Models\Assignment;
 use App\Models\Submit;
 use App\Models\Enrolled;
 use App\Models\User;
+use App\Models\UserType;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -130,5 +131,18 @@ class MainController extends Controller
         ]);
     }
 
-    
+    // get instructor info
+    function getInstructors()
+    {
+        $result = User::where("type_id", UserType::select("_id")->where("type", "instructor")->get())
+            ->get();
+        if ($result)
+            return response()->json([
+                "status" => true,
+                "result" => $result
+            ]);
+        return response()->json([
+            "status" => false
+        ]);
+    }
 }
