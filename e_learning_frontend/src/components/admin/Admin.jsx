@@ -37,11 +37,11 @@ function Admin() {
 
   const getAllCourses = async () => {
     const data = await e_learning.getAllCourses(setError);
-    // const ins = await e_learning.getInstructor(data.result, setError);
-    /// setInstructors(ins);
+    const ins = await e_learning.getInstructorForAdmin(data.result, setError);
+    setInstructors(ins);
     setCourses(data.result);
     setLoad(true);
-  }; 
+  };
 
   return (
     <>
@@ -56,30 +56,33 @@ function Admin() {
                   <img src={loading_img} alt="loading_img" />
                 </div>
               )}
-              {load &&
-                Courses.map((course, i) => {
-                 // course = course.course;
-                  return (
-                    <Course
-                      key={i}
-                      isStd={false}
-                      instructors={
-                        instructors[i] ? instructors[i].name : "Loading..."
-                      }
-                      courseNb={course.code}
-                      imgInstructors={
-                        course.image_path === "NA" ? userImg : course.image_path
-                      }
-                      imgCourse={
-                        course.image_path === "NA"
-                          ? courseImg
-                          : course.image_path
-                      }
-                      setError={setError}
-                      //setSubmit={setSubmit}
-                    />
-                  );
-                })}
+              <div className="admin-course">
+                {load &&
+                  Courses.map((course, i) => {
+                    return (
+                      <Course
+                        key={i}
+                        isStd={false}
+                        instructors={
+                          instructors[i] ? instructors[i].name : "Loading..."
+                        }
+                        courseNb={course.code}
+                        imgInstructors={
+                          course.image_path === "NA"
+                            ? userImg
+                            : course.image_path
+                        }
+                        imgCourse={
+                          course.image_path === "NA"
+                            ? courseImg
+                            : course.image_path
+                        }
+                        setError={setError}
+                        //setSubmit={setSubmit}
+                      />
+                    );
+                  })}
+              </div>
             </main>
           </div>
           <Footer />

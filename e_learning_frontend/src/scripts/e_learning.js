@@ -191,4 +191,12 @@ e_learning.getInstructor = async (data, setError) => {
   return ins;
 };
 
+//save Instructor info to load them on seach coures
+e_learning.getInstructorForAdmin = async (data, setError) => {
+  let ins = await Promise.all(
+    data.map((d) => e_learning.getInstructorInfo(setError, d.assign_to))
+  );
+  return ins;
+};
+
 export default e_learning;

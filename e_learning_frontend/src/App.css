@@ -309,6 +309,12 @@ img {
   margin: 1rem auto;
 }
 
+.admin-course{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 /* start footer */
 
 .footer {
