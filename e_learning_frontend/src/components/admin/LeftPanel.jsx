@@ -1,6 +1,6 @@
 import React from "react";
-import userImg from "../assets/user.png";
-import e_learning from "../scripts/e_learning";
+import userImg from "../../assets/user.png";
+import e_learning from "../../scripts/e_learning";
 import { useNavigate } from "react-router-dom";
 
 function LeftPanel() {
@@ -19,7 +19,10 @@ function LeftPanel() {
         <button className="btn">Instructors</button>
         <button className="btn">Courses</button>
       </div>
-      <button className="btn btn-logout" onClick={() => e_learning.logout(navigate)}>
+      <button
+        className="btn btn-logout"
+        onClick={() => e_learning.logout(navigate)}
+      >
         Logout
       </button>
     </aside>

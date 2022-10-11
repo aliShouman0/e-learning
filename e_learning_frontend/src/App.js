@@ -2,7 +2,7 @@ import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Student from "./components/Student";
-import Admin from "./components/Admin";
+import Admin from "./components/admin/Admin";
 
 
 function App() {
