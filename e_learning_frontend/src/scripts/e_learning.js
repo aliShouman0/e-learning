@@ -39,7 +39,7 @@ e_learning.postAPI = async (api_url, api_data) => {
 e_learning.logout = async (navigate) => {
   const api_logout = `${e_learning.baseUrl}logout`;
   const data = new FormData();
-  data.append("token", e_learning.token);
+  data.append("token",localStorage.getItem("access_token"));
   await e_learning.postAPI(api_logout, data);
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_info");

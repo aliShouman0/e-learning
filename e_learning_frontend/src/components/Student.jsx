@@ -31,49 +31,51 @@ function Student() {
       get();
     }
   }, [isLogin]);
-  if (!isLogin) {
-    return <></>;
-  }
+  
   return (
     <>
-      <Header />
-      {Courses.length===0 && <p className="error">No Enrollees🤨😥</p>}
-      {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
+      {isLogin && (
+        <>
+          <Header />
+          {Courses.length === 0 && <p className="error">No Enrollees🤨😥</p>}
+          {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
 
-      {submit && setTimeout(() => setSubmit(false), 3000) && (
-        <p className="error">Submit Done!! 🎉🎉🎉</p>
+          {submit && setTimeout(() => setSubmit(false), 3000) && (
+            <p className="error">Submit Done!! 🎉🎉🎉</p>
+          )}
+          <main className="student-main">
+            {!load && (
+              <div className="loading">
+                <img src={loading_img} alt="loading_img" />
+              </div>
+            )}
+
+            {load &&
+              Courses.map((course, i) => {
+                course = course.course;
+                return (
+                  <Course
+                    key={i}
+                    isStd={true}
+                    instructors={
+                      instructors[i] ? instructors[i].name : "Loading..."
+                    }
+                    courseNb={course.code}
+                    imgInstructors={
+                      course.image_path === "NA" ? userImg : course.image_path
+                    }
+                    imgCourse={
+                      course.image_path === "NA" ? courseImg : course.image_path
+                    }
+                    setError={setError}
+                    setSubmit={setSubmit}
+                  />
+                );
+              })}
+          </main>
+          <Footer />
+        </>
       )}
-      <main className="student-main">
-        {!load && (
-          <div className="loading">
-            <img src={loading_img} alt="loading_img" />
-          </div>
-        )}
-
-        {load &&
-          Courses.map((course, i) => {
-            course = course.course;
-            return (
-              <Course
-                key={i}
-                isStd={true}
-                instructors={
-                  instructors[i] ? instructors[i].name : "Loading..."
-                }
-                courseNb={course.code}
-                imgInstructors={
-                  course.image_path === "NA" ? userImg : course.image_path
-                }
-                imgCourse={
-                  course.image_path === "NA" ? courseImg : course.image_path
-                }
-                setError={setError}
-                setSubmit={setSubmit}
-              />
-            );
-          })}
-      </main>
-      <Footer />
     </>
   );
 }
