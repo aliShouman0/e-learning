@@ -44,6 +44,19 @@ class MainController extends Controller
             "status" => false
         ]);
     }
+    // getAllCourses
+    function getAllCourses()
+    {
+        $result = Course::get();
+        if ($result)
+            return response()->json([
+                "status" => true,
+                "result" => $result
+            ]);
+        return response()->json([
+            "status" => false
+        ]);
+    }
     //get all Announcements for specific Course
     function getAnnouncements($code)
     {
@@ -87,7 +100,7 @@ class MainController extends Controller
         if ($request->assignment_id && $request->file) {
             $submit->user_id = $id;
             $submit->assignment_id = $request->assignment_id;
-            $submit->file_path ="request->file";
+            $submit->file_path = "request->file";
             if ($submit->save()) {
                 return response()->json([
                     "status" => "Success",
