@@ -6,17 +6,20 @@ import loading_img from "../../assets/loading.png";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-function AddCourse({ close }) {
+function AddCourse({ close ,instructor}) {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
-  const [disabled, setdisabled] = useState(false);
+  const [disabled, setdisabled] = useState(true);
   const [load, setLoad] = useState(true);
+  instructor=instructor.map((d)=>{return {value:d._id,label:d.name}})
   const options = [
     { value: "one", label: "One" },
     { value: "two", label: "Two", className: "myOptionClassName" },
   ];
+  console.log(instructor)
   const getIns = (e) => {
+    setdisabled(false)
     console.log(e);
   };
   return (
@@ -28,7 +31,7 @@ function AddCourse({ close }) {
         <h2 className="popup-title">Add Course</h2>
         {error && <p className="error">⛔❕✔️ File Loaded ⭕🛑❗</p>}
 
-        <form className="form" onSubmit={onsubmit}>
+        <form className="course-form" onSubmit={onsubmit}>
           <input
             type="text"
             placeholder="Course Code"
@@ -46,12 +49,11 @@ function AddCourse({ close }) {
             required
           />
           <Dropdown
-            options={options}
+            className="input-login dropdown"
+            options={instructor}
             onChange={(e) => getIns(e)}
-            //value={defaultOption}
             placeholder="Select an option"
           />
-          ;
           <input
             type={"submit"}
             disabled={disabled}

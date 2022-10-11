@@ -39,12 +39,15 @@ function Admin() {
     const ins = await e_learning.getInstructorForAdmin(data.result, setError);
     setInstructors(ins);
     setCourses(data.result);
-    setLoad(true);
+    setLoad(true); 
   };
   return (
     <>
       {isLogin && (
-        <>{addCourse&&<AddCourse close={SetaddCourse}/>}
+        <>
+          {addCourse && (
+            <AddCourse close={SetaddCourse} instructor={instructors} />
+          )}
           <div className="admin-container">
             <LeftPanel SetgetCourses={SetgetCourses} />
             <main className="admin-main">
@@ -55,14 +58,16 @@ function Admin() {
                 </div>
               )}
               <div className="admin-btn">
-                <button
-                  className="btn"
-                  onClick={() => {
-                    SetaddCourse(true);
-                  }}
-                >
-                  Add Course
-                </button>
+                {load && getCourses && (
+                  <button
+                    className="btn"
+                    onClick={() => {
+                      SetaddCourse(true);
+                    }}
+                  >
+                    Add Course
+                  </button>
+                )}
               </div>
               <div className="admin-course">
                 {load &&

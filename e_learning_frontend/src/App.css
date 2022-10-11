@@ -225,7 +225,7 @@ img {
   background-color: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   width: 50%;
-  height: 60%;
+  height: 65%;
   margin: 2rem auto;
   padding: 0.3rem;
   overflow-y: auto;
@@ -316,10 +316,15 @@ img {
   flex-wrap: wrap;
 }
 
-.admin-btn{
+.admin-btn {
   margin: 0.5rem;
 }
 
+.course-form {
+  text-align: center;
+}
+
+ 
 /* start footer */
 
 .footer {
