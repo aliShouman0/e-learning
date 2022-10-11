@@ -35,6 +35,9 @@ Route::group(["prefix" => "v0.1"], function () {
     Route::get('get_all_Courses', [MainController::class, 'getAllCourses']);
     //get all  instructor
     Route::get('get_instructors', [MainController::class, 'getInstructors']);
+    //add new course
+    Route::post('add_course', [MainController::class, 'addCourse']);
+
   });
   // add/signup  user
   // Route::post("signup", [AuthController::class, "signup"])->name("signup");

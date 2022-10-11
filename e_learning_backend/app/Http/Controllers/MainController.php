@@ -135,15 +135,39 @@ class MainController extends Controller
     function getInstructors()
     {
         $type = UserType::where("type", "instructor")->get();
-        $result = User::where("type_id",$type[0]->_id)
+        $result = User::where("type_id", $type[0]->_id)
             ->get();
         if ($result)
             return response()->json([
                 "status" => true,
-                "result" => $result 
+                "result" => $result
             ]);
         return response()->json([
             "status" => false
         ]);
+    }
+
+
+    //add Course
+    function addCourse(Request $request)
+    {
+        $submit = new Course;
+        if ($request->code && $request->name && $request->instructorId) {
+            $submit->code = $request->code;
+            $submit->name = $request->name;
+            $submit->assign_to = $request->instructorId;
+            $submit->image_path = "NA";
+            if ($submit->save()) {
+                return response()->json([
+                    "status" => "Success",
+                    "data" => $submit
+                ]);
+            }
+        }
+
+        return response()->json([
+            "status" => "Error",
+            "data" => "Error -Some Thing went wrong "
+        ], 400);
     }
 }
