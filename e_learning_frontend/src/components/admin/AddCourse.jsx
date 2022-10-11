@@ -14,7 +14,16 @@ function AddCourse({ close }) {
   const [load, setLoad] = useState(true);
   const [instructor, setInstructor] = useState("");
 
-
+  const getInstructors = async () => {
+    setLoad(false);
+    const data = await e_learning.getInstructors(setError);
+    setInstructor(
+      await data.map((d) => {
+        return { value: d._id, label: d.name };
+      })
+    );
+    setLoad(true);
+  };
 
   const getIns = (e) => {
     setdisabled(false);
@@ -22,7 +31,7 @@ function AddCourse({ close }) {
   };
 
   useEffect(() => {
-   // getInstructors();
+    getInstructors();
   }, []);
 
   return (
