@@ -33,6 +33,9 @@ Route::group(["prefix" => "v0.1"], function () {
     //later add  those api to new guard like jwt to check if admin user   ////
     //get all  Courses
     Route::get('get_all_Courses', [MainController::class, 'getAllCourses']);
+
+    //get all  instructor
+    Route::get('get_instructors', [MainController::class, 'getInstructors']);
   });
   // add/signup  user
   // Route::post("signup", [AuthController::class, "signup"])->name("signup");
