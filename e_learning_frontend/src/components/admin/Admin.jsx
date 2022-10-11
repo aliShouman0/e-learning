@@ -12,26 +12,23 @@ import { useNavigate } from "react-router-dom";
 function Admin() {
   const navigate = useNavigate();
   const [error, setError] = useState(false);
-  const [load, setLoad] = useState(false);
+  const [load, setLoad] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
   const [getStudent, setGetStudent] = useState(false);
   const [getInstructors, setGetInstructors] = useState(false);
-  const [getCourses, SetgetCourses] = useState(true);
+  const [getCourses, SetgetCourses] = useState(false);
   const [Courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
 
   useEffect(() => {
     e_learning.checkLogin(navigate, setIsLogin);
-    setLoad(false);
-
     if (isLogin) {
-      //  get();
-    }
-
-    if (getCourses) {
-      getAllCourses();
-      setGetInstructors(false);
-      setGetStudent(false);
+      if (getCourses) {
+        setLoad(false);
+        getAllCourses();
+        setGetInstructors(false);
+        setGetStudent(false);
+      }
     }
   }, [isLogin, getCourses]);
 
@@ -42,7 +39,6 @@ function Admin() {
     setCourses(data.result);
     setLoad(true);
   };
-
   return (
     <>
       {isLogin && (
@@ -58,6 +54,7 @@ function Admin() {
               )}
               <div className="admin-course">
                 {load &&
+                  getCourses &&
                   Courses.map((course, i) => {
                     return (
                       <Course

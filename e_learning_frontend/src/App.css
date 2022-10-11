@@ -164,9 +164,10 @@ img {
   background-color: white;
   margin: 1rem;
   border-radius: 10px;
-  height: 35vh;
-  width: 20%;
+  height: 25vh;
+  width: 15%;
   border: 1px solid #71543c;
+  
 }
 
 .course-header {
@@ -188,8 +189,8 @@ img {
 }
 
 .course-body .user-img {
-  width: 5vw;
-  height: 5vh;
+  width: 3.5vw;
+  height: 3.5vh;
   margin: 0.5rem;
 }
 
@@ -201,11 +202,11 @@ img {
 }
 
 .course-btn {
-  width: 60%;
+  width: auto;
   font-size: 1.2vw;
   font-weight: lighter;
   margin: 0.3rem auto;
-  padding: 0.3rem;
+  padding: 0.5rem;
   border: none;
   outline: none;
 }
@@ -283,10 +284,11 @@ img {
 .admin-main {
   position: relative;
   width: 85%;
+  overflow-y: auto;
 }
 
 .left-panel {
-  height: 85vh;
+  height: 87vh;
   width: 15%;
   background-color: #78685a;
   position: relative;
@@ -318,18 +320,18 @@ img {
 /* start footer */
 
 .footer {
-  padding-top: 1rem;
+  padding-top: 0.3rem;
   display: flex;
   justify-content: space-between;
-  height: 20vh;
+  height: 13vh;
   width: 100%;
   background-color: #78685a;
   color: white;
 }
 
 .footer .logo {
-  width: 10%;
-  height: 80%;
+  width: 8%;
+  height: 50%;
   margin: auto 0.5rem;
   opacity: 0.6;
 }
@@ -340,12 +342,12 @@ img {
 }
 
 .footer-info p {
-  padding: 0.3rem;
+  padding: 0.2rem;
 }
 
 .footer-center {
   margin: auto;
-  font-size: 3vw;
+  font-size: 2.2vw;
   font-weight: bolder;
   letter-spacing: 2px;
   text-align: center;
