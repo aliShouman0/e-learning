@@ -1,6 +1,6 @@
 import React from "react";
 import Footer from "./Footer";
-import Header from "./Header";
+import LeftPanel from "./LeftPanel";
 import courseImg from "../assets/course.png";
 import loading_img from "../assets/loading.png";
 import userImg from "../assets/user.png";
@@ -26,7 +26,7 @@ function Admin() {
     <>
       {isLogin && (
         <>
-          
+          <LeftPanel/> <Footer/>
         </>
       )}
     </>
