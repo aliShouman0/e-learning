@@ -21,6 +21,7 @@ function Admin() {
   const [Courses, setCourses] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [addCourse, SetaddCourse] = useState(false);
+  const [addedCourse, SetaddedCourse] = useState(false);
 
   useEffect(() => {
     e_learning.checkLogin(navigate, setIsLogin);
@@ -39,19 +40,24 @@ function Admin() {
     const ins = await e_learning.getInstructorForAdmin(data.result, setError);
     setInstructors(ins);
     setCourses(data.result);
-    setLoad(true); 
+    setLoad(true);
   };
   return (
     <>
       {isLogin && (
         <>
           {addCourse && (
-            <AddCourse close={SetaddCourse} instructor={instructors} />
+            <AddCourse
+              close={SetaddCourse}
+              instructor={instructors}
+              addedCourse={SetaddedCourse}
+            />
           )}
           <div className="admin-container">
             <LeftPanel SetgetCourses={SetgetCourses} />
             <main className="admin-main">
               {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
+              {addedCourse && <p className="error">Add Course Done 🎉🎉</p>}
               {!load && (
                 <div className="loading">
                   <img src={loading_img} alt="loading_img" />

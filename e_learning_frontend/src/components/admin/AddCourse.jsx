@@ -6,13 +6,14 @@ import loading_img from "../../assets/loading.png";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-function AddCourse({ close }) {
+function AddCourse({ close ,addedCourse}) {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [disabled, setdisabled] = useState(true);
   const [load, setLoad] = useState(true);
   const [instructor, setInstructor] = useState("");
+  const [instructorId, setInstructorId] = useState("");
 
   const getInstructors = async () => {
     setLoad(false);
@@ -27,9 +28,32 @@ function AddCourse({ close }) {
 
   const getIns = (e) => {
     setdisabled(false);
-    console.log(e);
-  };
+    setInstructorId(e.value) 
 
+  };
+   
+
+  const onsubmit = (e) => {
+    e.preventDefault();
+    setLoad(true);
+    setdisabled(true);
+    setError(false);
+    if (!name) {
+      setError(true);
+      setdisabled(false);
+      setLoad(false);
+      return;
+    }
+    if (!code) {
+      setError(true);
+      setdisabled(false);
+      setLoad(false);
+      return;
+    }
+    setCode("");
+    setName("");
+    e_learning.addCourse(code, name, instructorId, setError,close,addedCourse);
+  };
   useEffect(() => {
     getInstructors();
   }, []);
@@ -43,6 +67,11 @@ function AddCourse({ close }) {
         <h2 className="popup-title">Add Course</h2>
         {error && (
           <p className="error">⛔❕✔️ Some Thing is Wrong 🤨😥 ⭕🛑❗</p>
+        )}
+        {!load && (
+          <div className="loading load-up">
+            <img src={loading_img} alt="loading_img" />
+          </div>
         )}
 
         <form className="course-form" onSubmit={onsubmit}>
