@@ -218,7 +218,7 @@ e_learning.addCourse = async (
   close,
   addedCourse
 ) => {
-  const api = `${e_learning.baseUrl} `;
+  const api = `${e_learning.baseUrl}add_course`;
   const dataToSubmit = new FormData();
   dataToSubmit.append("token", localStorage.getItem("access_token"));
   dataToSubmit.append("code", code);

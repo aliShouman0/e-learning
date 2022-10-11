@@ -33,7 +33,7 @@ function Admin() {
         setGetStudent(false);
       }
     }
-  }, [isLogin, getCourses]);
+  }, [isLogin, getCourses, addedCourse]);
 
   const getAllCourses = async () => {
     const data = await e_learning.getAllCourses(setError);
@@ -57,7 +57,9 @@ function Admin() {
             <LeftPanel SetgetCourses={SetgetCourses} />
             <main className="admin-main">
               {error && <p className="error">Some Thing is Wrong 🤨😥</p>}
-              {addedCourse && <p className="error">Add Course Done 🎉🎉</p>}
+              {addedCourse && setTimeout(() => SetaddedCourse(false), 3000) && (
+                <p className="error">Add Course Done 🎉🎉</p>
+              )}
               {!load && (
                 <div className="loading">
                   <img src={loading_img} alt="loading_img" />
