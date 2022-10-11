@@ -6,7 +6,7 @@ import loading_img from "../../assets/loading.png";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-function AddCourse({ close ,addedCourse}) {
+function AddCourse({ close, addedCourse }) {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
@@ -28,10 +28,8 @@ function AddCourse({ close ,addedCourse}) {
 
   const getIns = (e) => {
     setdisabled(false);
-    setInstructorId(e.value) 
-
+    setInstructorId(e.value);
   };
-   
 
   const onsubmit = (e) => {
     e.preventDefault();
@@ -52,7 +50,14 @@ function AddCourse({ close ,addedCourse}) {
     }
     setCode("");
     setName("");
-    e_learning.addCourse(code, name, instructorId, setError,close,addedCourse);
+    e_learning.addCourse(
+      code,
+      name,
+      instructorId,
+      setError,
+      close,
+      addedCourse
+    );
   };
   useEffect(() => {
     getInstructors();
@@ -91,6 +96,8 @@ function AddCourse({ close ,addedCourse}) {
             onChange={(e) => setName(e.target.value)}
             required
           />
+          <br/>
+          Instructor
           <Dropdown
             className="input-login dropdown"
             options={instructor}
