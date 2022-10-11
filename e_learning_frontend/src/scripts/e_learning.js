@@ -199,19 +199,38 @@ e_learning.getInstructorForAdmin = async (data, setError) => {
 
 //get Instructor info
 e_learning.getInstructors = async (setError) => {
-  const url = `${e_learning.baseUrl}get_instructors?token=${localStorage.getItem(
-    "access_token"
-  )}`;
+  const url = `${
+    e_learning.baseUrl
+  }get_instructors?token=${localStorage.getItem("access_token")}`;
   const res = await e_learning.getAPI(url);
   if (res.status && res.status === 200) {
     return res.data.result;
   } else {
     setError(true);
   }
-
-
 };
 
-
+e_learning.addCourse = async (
+  code,
+  name,
+  instructorId,
+  setError,
+  close,
+  addedCourse
+) => {
+  const api = `${e_learning.baseUrl} `;
+  const dataToSubmit = new FormData();
+  dataToSubmit.append("token", localStorage.getItem("access_token"));
+  dataToSubmit.append("code", code);
+  dataToSubmit.append("name", name);
+  dataToSubmit.append("instructorId", instructorId);
+  const res = await e_learning.postAPI(api, dataToSubmit);
+  if (res.status && res.status === 200) {
+    close(false);
+    addedCourse(true);
+  } else {
+    setError(true);
+  }
+};
 
 export default e_learning;
