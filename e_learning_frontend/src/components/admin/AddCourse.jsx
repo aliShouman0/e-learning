@@ -6,22 +6,25 @@ import loading_img from "../../assets/loading.png";
 import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
-function AddCourse({ close ,instructor}) {
+function AddCourse({ close }) {
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [error, setError] = useState(false);
   const [disabled, setdisabled] = useState(true);
   const [load, setLoad] = useState(true);
-  instructor=instructor.map((d)=>{return {value:d._id,label:d.name}})
-  const options = [
-    { value: "one", label: "One" },
-    { value: "two", label: "Two", className: "myOptionClassName" },
-  ];
-  console.log(instructor)
+  const [instructor, setInstructor] = useState("");
+
+
+
   const getIns = (e) => {
-    setdisabled(false)
+    setdisabled(false);
     console.log(e);
   };
+
+  useEffect(() => {
+   // getInstructors();
+  }, []);
+
   return (
     <div className="popup">
       <div className="pop-box">
@@ -29,7 +32,9 @@ function AddCourse({ close ,instructor}) {
           X
         </button>
         <h2 className="popup-title">Add Course</h2>
-        {error && <p className="error">⛔❕✔️ File Loaded ⭕🛑❗</p>}
+        {error && (
+          <p className="error">⛔❕✔️ Some Thing is Wrong 🤨😥 ⭕🛑❗</p>
+        )}
 
         <form className="course-form" onSubmit={onsubmit}>
           <input

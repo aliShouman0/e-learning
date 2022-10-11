@@ -39,7 +39,7 @@ e_learning.postAPI = async (api_url, api_data) => {
 e_learning.logout = async (navigate) => {
   const api_logout = `${e_learning.baseUrl}logout`;
   const data = new FormData();
-  data.append("token",localStorage.getItem("access_token"));
+  data.append("token", localStorage.getItem("access_token"));
   await e_learning.postAPI(api_logout, data);
   localStorage.removeItem("access_token");
   localStorage.removeItem("user_info");
@@ -168,12 +168,11 @@ e_learning.getCourses = async (setError) => {
   }
 };
 
-
 //get all Courses that enrolled by specific student
 e_learning.getAllCourses = async (setError) => {
-  const url = `${e_learning.baseUrl}get_all_Courses?token=${localStorage.getItem(
-    "access_token"
-  )}`;
+  const url = `${
+    e_learning.baseUrl
+  }get_all_Courses?token=${localStorage.getItem("access_token")}`;
   const res = await e_learning.getAPI(url);
   if (res.status && res.status === 200) {
     return res.data;
@@ -181,7 +180,6 @@ e_learning.getAllCourses = async (setError) => {
     setError(true);
   }
 };
-
 
 //save Instructor info to load them on seach coures
 e_learning.getInstructor = async (data, setError) => {
@@ -199,4 +197,16 @@ e_learning.getInstructorForAdmin = async (data, setError) => {
   return ins;
 };
 
+//get Instructor info
+e_learning.getInstructors = async (setError) => {
+  const url = `${e_learning.baseUrl}get_instructors?token=${localStorage.getItem(
+    "access_token"
+  )}`;
+  const res = await e_learning.getAPI(url);
+  if (res.status && res.status === 200) {
+    return res.data.result;
+  } else {
+    setError(true);
+  }
+};
 export default e_learning;
