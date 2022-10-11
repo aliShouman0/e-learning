@@ -134,12 +134,13 @@ class MainController extends Controller
     // get instructor info
     function getInstructors()
     {
-        $result = User::where("type_id", UserType::select("_id")->where("type", "instructor")->get())
+        $type = UserType::where("type", "instructor")->get();
+        $result = User::where("type_id",$type[0]->_id)
             ->get();
         if ($result)
             return response()->json([
                 "status" => true,
-                "result" => $result
+                "result" => $result 
             ]);
         return response()->json([
             "status" => false
