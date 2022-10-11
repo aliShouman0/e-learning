@@ -30,5 +30,8 @@ function LeftPanel({ SetgetCourses }) {
     </aside>
   );
 }
+LeftPanel.defaultProps = {
+  className: " ",
+};
 
 export default LeftPanel;

@@ -49,7 +49,7 @@ function Student() {
                 <img src={loading_img} alt="loading_img" />
               </div>
             )}
-
+              
             {load &&
               Courses.map((course, i) => {
                 course = course.course;

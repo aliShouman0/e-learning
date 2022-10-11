@@ -75,14 +75,13 @@ function Admin() {
                             : course.image_path
                         }
                         setError={setError}
-                        //setSubmit={setSubmit}
                       />
                     );
                   })}
               </div>
             </main>
           </div>
-          <Footer />
+          <Footer className="footer-admin"/>
         </>
       )}
     </>

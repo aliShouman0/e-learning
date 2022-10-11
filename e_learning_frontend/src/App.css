@@ -164,10 +164,9 @@ img {
   background-color: white;
   margin: 1rem;
   border-radius: 10px;
-  height: 25vh;
+  height: 35vh;
   width: 15%;
   border: 1px solid #71543c;
-  
 }
 
 .course-header {
@@ -311,7 +310,7 @@ img {
   margin: 1rem auto;
 }
 
-.admin-course{
+.admin-course {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -327,6 +326,11 @@ img {
   width: 100%;
   background-color: #78685a;
   color: white;
+  margin-top: 5rem;
+}
+
+.footer-admin {
+  margin: 0;
 }
 
 .footer .logo {

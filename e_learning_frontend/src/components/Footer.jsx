@@ -1,8 +1,8 @@
 import React from "react";
 import logo from "../assets/logo.png";
-function Footer() {
+function Footer({className}) {
   return (
-    <footer className="footer">
+    <footer className={`footer ${className}`}>
       <div className="logo">
         <img src={logo} alt="logo" />
       </div>
@@ -18,5 +18,6 @@ function Footer() {
     </footer>
   );
 }
+
 
 export default Footer;
